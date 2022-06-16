@@ -254,6 +254,15 @@ func (u *UserToUpdate) ProviderToLink(userProvider *UserProvider) *UserToUpdate 
 	return u.set("linkProviderUserInfo", userProvider)
 }
 
+// Generic setter
+func (u *UserToUpdate) Set(key string, value interface{}) *UserToUpdate {
+	if u.params == nil {
+		u.params = make(map[string]interface{})
+	}
+	u.params[key] = value
+	return u
+}
+
 // ProvidersToDelete unlinks this user from the specified providers.
 func (u *UserToUpdate) ProvidersToDelete(providerIds []string) *UserToUpdate {
 	// skip setting the value to empty if it's already empty.
